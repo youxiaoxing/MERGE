@@ -27,3 +27,13 @@ To evaluate the trained checkpoint, set the ckpt_file parameter in configs/confi
 ```
 python caption_train.py
 ```
+
+To compute the Caption Generation metrics, modify `compute_score.py` by setting the paths for your result JSON file and train_data.json, then run:
+```
+python compute_score.py
+```
+
+To compute the Named Entity Recognition metrics, set your result JSON file path in `compute_score_entity.py`, then run:
+```
+python compute_score_entity.py
+```
