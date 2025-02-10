@@ -46,8 +46,8 @@ class ParseDataset(Dataset):
         self.args = args
         self.meta = json.load(open(args.annotation, "r"))
         self.meta = self.meta[split]
-        if split != "train":
-            self.meta = self.meta[5000:5500]
+        # if split != "train":
+        #     self.meta = self.meta[5000:5500]
         # else:
         #     self.meta = self.meta[0:500]
         self.parser = FieldParser(args)
