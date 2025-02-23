@@ -1,15 +1,17 @@
 # MERGE
-This is the code for "Knowledge Completes the Vision: A Multi-modal Entity-aware Retrieval-Augmented Generation Framework for News Image Captioning". We will gradually perfect it.
+This is the code for "Knowledge Completes the Vision: A Multi-modal Entity-aware Retrieval-Augmented Generation Framework for News Image Captioning". 
 
-- [x] Upload training and evaluation code
-- [ ] Clean and upload preprocessing code
-- [ ] Release detailed implementation process
+# Data
+Please download GoodNews and NYTimes800k datasets from the official repo of [Transform-and-Tell](https://github.com/alasdairtran/transform-and-tell).
 
 # Preprocess
 
 # Installation
-
-# Data
+To train our code, please run:
+```
+conda env create -n instructBlip --file requirements.txt
+conda activate instructBlip
+```
 
 # Trainning (GoodNews)
 To train MERGE on the GoodNews dataset, the first step is to modify `configs/config.py`. Inside the config file, `Annotatio` parameter specifies the path to the training JSON file as described in the Data section, and `base_dir` parameter specifies the path to the image directory. Then run below command to train our code:
