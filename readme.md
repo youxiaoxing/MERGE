@@ -50,6 +50,10 @@ def get_wiki_image_url(entity, max_retries=5):
 4. Then we use [icrawler](https://github.com/hellock/icrawler) to scrape five images from Google Search.
 5. For Person-type entities' images, we use [InsightFace's buffalo_l](https://github.com/deepinsight/insightface/tree/master/python-package) to detect faces and extract face embeddings. For other visible entities' images, we use CLIP to extract visual embeddings.
 
+### HCMA
+
+### Background Knowledge Graph Construction
+
 # Installation
 To train our code, please run:
 ```
