@@ -2,7 +2,28 @@
 This is the code for "Knowledge Completes the Vision: A Multi-modal Entity-aware Retrieval-Augmented Generation Framework for News Image Captioning". 
 
 # Data
-Please download GoodNews and NYTimes800k datasets from the official repo of [Transform-and-Tell](https://github.com/alasdairtran/transform-and-tell).
+Please download GoodNews and NYTimes800k datasets from the official repo of [Transform-and-Tell](https://github.com/alasdairtran/transform-and-tell). We use JSON format as the train file, the structure is:
+```json
+{
+    "train": [
+        "id": "4fd275a48eb7c8105d83599c_0",
+            "image": "4fd275a48eb7c8105d83599c_0.jpg",
+            "graph_str": "constructed background knowledge graph",
+            "conversations": [
+                {
+                    "from": "human",
+                    "value": "Please generate the informative and brief news image caption with the associated news article summary and other information.\nNews Summary: {summary}. \nRelated Sentences: {related sentences}. \nInitial reference caption: {hypo-caption} \nPossible entities in image: {entities} \nCpation : "
+                },
+                {
+                    "from": "gpt",
+                    "value": "Prime Minister Gordon Brown announced new security measures in a statement to the House of Commons on Wednesday."
+                }
+            ]
+    ],
+    "val": [],
+    "test": []
+}
+```
 
 # Preprocess
 ## Entity-central Multimodal Knowledge Base Construction
@@ -50,9 +71,11 @@ def get_wiki_image_url(entity, max_retries=5):
 4. Then we use [icrawler](https://github.com/hellock/icrawler) to scrape five images from Google Search.
 5. For Person-type entities' images, we use [InsightFace's buffalo_l](https://github.com/deepinsight/insightface/tree/master/python-package) to detect faces and extract face embeddings. For other visible entities' images, we use CLIP to extract visual embeddings.
 
-### HCMA
+### Hypothesis Caption-guided Multimodal Alignment 
+We used [InternVL2-Llama3-76B-AWQ](https://huggingface.co/OpenGVLab/InternVL2-Llama3-76B-AWQ) to perform the cross-modal alignment as described in the paper. Before training the model, we first performed HCMA on our selected training dataset, validation dataset and test dataset. Then we only used the selected sentences, hypo-captions and summaries as the context input for InstructBlip.
 
 ### Background Knowledge Graph Construction
+To get the background knowledge graph, we provide the code in `merge_graph.py`, where `final_sentences` contains our selected sentences using HCMA and `new_graph` is our background knowledge subgraph.
 
 # Installation
 To train our code, please run:
@@ -61,13 +84,13 @@ conda env create -n instructBlip --file requirements.txt
 conda activate instructBlip
 ```
 
-# Trainning (GoodNews)
+# Training (GoodNews)
 To train MERGE on the GoodNews dataset, the first step is to modify `configs/config.py`. Inside the config file, `Annotatio` parameter specifies the path to the training JSON file as described in the Data section, and `base_dir` parameter specifies the path to the image directory. Then run below command to train our code:
 ```
 python caption_train.py
 ```
 
-# Trainning (NYTimes800k)
+# Training (NYTimes800k)
 To train MERGE on the NYTimes800k dataset, the first step is to modify `configs/config_nytimes.py`. Inside the config file, `Annotatio` parameter specifies the path to the training JSON file as described in the Data section, and `base_dir` parameter specifies the path to the image directory. Then run below command to train our code:
 ```
 python caption_train_nytimes.py
@@ -83,7 +106,7 @@ To compute the Caption Generation metrics, modify `compute_score.py` by setting 
 python compute_score.py
 ```
 
-To compute the Named Entity Recognition metrics, set your result JSON file path in `compute_score_entity.py`, then run:
+To compute the Named Entity Recognition metrics, set the path for your result JSON file in `compute_score_entity.py`, then run:
 ```
 python compute_score_entity.py
 ```
