@@ -46,10 +46,6 @@ class ParseDataset(Dataset):
         self.args = args
         self.meta = json.load(open(args.annotation, "r"))
         self.meta = self.meta[split]
-        # if split != "train":
-        #     self.meta = self.meta[5000:5500]
-        # else:
-        #     self.meta = self.meta[0:500]
         self.parser = FieldParser(args)
 
     def __len__(self):
@@ -61,6 +57,6 @@ class ParseDataset(Dataset):
 
 def create_datasets(args):
     train_dataset = ParseDataset(args, 'train')
-    dev_dataset = ParseDataset(args, 'test')
+    dev_dataset = ParseDataset(args, 'val')
     test_dataset = ParseDataset(args, 'test')
     return train_dataset, dev_dataset, test_dataset

@@ -95,10 +95,17 @@ To train MERGE on the NYTimes800k dataset, the first step is to modify `configs/
 ```
 python caption_train_nytimes.py
 ```
+
+# Training (Visual News)
+To train MERGE on the Visual News dataset, the first step is to modify `configs/config_visualnews.py`. Inside the config file, `Annotatio` parameter specifies the path to the training JSON file as described in the Data section, and `base_dir` parameter specifies the path to the image directory. Then run below command to train our code:
+```
+python caption_train_visualnews.py
+```
+
 # Evaluation
 To evaluate the trained checkpoint, set the ckpt_file parameter in configs/config_nytimes.py to your checkpoint file path. Then run:
 ```
-python caption_train.py
+python caption_train.py --validate
 ```
 
 To compute the Caption Generation metrics, modify `compute_score.py` by setting the paths for your result JSON file and train_data.json, then run:

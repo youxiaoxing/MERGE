@@ -29,7 +29,7 @@ def setup_seed(seed):
     torch.backends.cudnn.benchmark = False  # 与上面一条代码配套使用，True的话会自动寻找最适合当前配置的高效算法，来达到优化运行效率的问题。False保证实验结果可复现。
 setup_seed(seed)
 
-from configs.config import parser
+from configs.config_visualnews import parser
 from dataset.goodnews_module import DataModule
 from lightning_tools.callbacks import add_callbacks
 from models.CaptionGenGPT import CaptionGenGPT

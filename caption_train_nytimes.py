@@ -1,5 +1,4 @@
 import os
-# os.environ["CUDA_VISIBLE_DEVICES"] = "1,2,3"
 os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
 seed = 42
 # os.environ['PYTHONHASHSEED'] = str(seed)  # 禁止hash随机化

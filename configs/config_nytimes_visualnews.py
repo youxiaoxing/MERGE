@@ -7,8 +7,8 @@ parser.add_argument('--port', default="27017", type=str, help="mongodb port")
 parser.add_argument('--test', action='store_true', help="only run test set")
 parser.add_argument('--validate', action='store_true', help="only run validation set")
 parser.add_argument('--dataset', type=str, default='mimic_cxr', help="goodnews or NYTimes800k")
-parser.add_argument('--annotation', type=str, default=r'nytimes.json', help="annotation file of the dataset")
-parser.add_argument('--base_dir', type=str, default=r'dataset/nytimes/images', help="base dir to help find images")
+parser.add_argument('--annotation', type=str, default=r'visualnews.json', help="annotation file of the dataset")
+parser.add_argument('--base_dir', type=str, default=r'dataset/visualnews/images', help="base dir to help find images")
 parser.add_argument('--batch_size', default=1, type=int, help="use for training duration per worker")
 parser.add_argument('--val_batch_size', default=1, type=int, help="use for validation duration per worker")
 parser.add_argument('--test_batch_size', default=2, type=int, help="use for testing duration per worker")
@@ -20,14 +20,14 @@ parser.add_argument('--vllm', default='instructblip-vicuna-7b', type=str, help="
 parser.add_argument('--end_sym', default='</s>', type=str)
 
 # ======================== SavedModel Configs ===========================
-parser.add_argument('--savedmodel_path', type=str, default='save/nytimes/train_total')
+parser.add_argument('--savedmodel_path', type=str, default='save/visualnewes/train_total')
 parser.add_argument('--ckpt_file', type=str, default=None, help='the checkpoint file to load')
 parser.add_argument('--delta_file', type=str, default=None, help='the delta file to load')
 parser.add_argument('--weights', type=list, default=[0.5, 0.5])
 parser.add_argument('--scorer_types', type=list, default=['Bleu_4', 'CIDEr'])
 
 # ========================= Learning Configs ==========================
-parser.add_argument('--learning_rate', default=3e-5, type=float, help='initial learning rate')
+parser.add_argument('--learning_rate', default=2e-5, type=float, help='initial learning rate')
 parser.add_argument('--gradient_clip_val', default=None, type=int, help='gradient clip value')
 
 # ========================= Decoding Settings ==========================
