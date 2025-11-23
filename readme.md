@@ -2,6 +2,8 @@
 
 This repository contains the official implementation of **"Knowledge Completes the Vision: A Multimodal Entity-aware Retrieval-Augmented Generation Framework for News Image Captioning"**  (Accepted as **AAAI 2026 Oral**).
 
+![Merge](./figures/merge-framework.png)
+
 ## 🌟 Overview
 
 News image captioning goes beyond describing visual content: it demands **accurate identification of people, events, locations, and contextual details** by jointly reasoning over the news article, the image, and external knowledge. However, existing approaches struggle with three fundamental challenges:
